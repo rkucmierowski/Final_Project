@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="pl">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'heritage_register/style.css' %}">
+</head>
+<body>
+
+  <div id="card-pattern">
+    <table>
+      <!-- header -->
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <!-- 1st row -->
+      <tbody>
+        <tr>
+          <td id="card-type">
+            GEZ
+          </td>
+          <td colspan="2" id="card-title">
+            KARTA ADRESOWA ZABYTKU NIERUCHOMEGO
+          </td>
+          <td rowspan="2">
+            <span>3. Miejscowość</span>
+          </td>
+        </tr>
+        <!-- 2nd row -->
+        <tr>
+          <td colspan="2">
+            <span>1. Nazwa</span>
+          </td>
+          <td>
+            <span>2. Czas powstania</span>
+          </td>
+        </tr>
+        <!-- 3rd row -->
+        <tr>
+          <td colspan="3" rowspan="4">
+            <span>8. Fotografia z opisem wskazującym orientację albo mapa z zaznaczonym stanowiskiem archeologicznym</span>
+            <img src="">
+          </td>
+          <td>
+            <span>4. Adres</span>
+          </td>
+        </tr>
+        <!-- 4th row -->
+        <tr>
+          <td>
+            <span>5. Przynależność administracyjna</span><br>
+            <p>
+              <span>województwo</span>
+            </p>
+            <p>
+              <span>powiat</span>
+            </p>
+            <p>
+              <span>gmina</span>
+            </p>
+          </td>
+        </tr>
+        <!-- 5th row -->
+        <tr>
+          <td>
+            <span>6. Formy ochrony</span>
+          </td>
+        </tr>
+        <!-- 6th row -->
+        <tr>
+          <td>
+            <span>7. Opracowanie karty adresowej (autor, data i&nbsp;podpis)</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

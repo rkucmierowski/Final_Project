@@ -20,5 +20,5 @@ from heritage_register.views import base, GeneratePdf
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base),
-    path('card.pdf', GeneratePdf.as_view())
+    path('pdf/', GeneratePdf.as_view())
 ]

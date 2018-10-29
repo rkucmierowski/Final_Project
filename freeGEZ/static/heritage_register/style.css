@@ -82,6 +82,7 @@
   /* Print settings */
 
   @page {
+    size: A4 landscape;
     margin: 20mm;
   }
 

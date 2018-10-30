@@ -1,92 +1,107 @@
-@media screen, print {
-  #card-pattern {
-    border: 1px solid red;
-    font: 10pt 'Arial', sans-serif;
-    height: 165mm;
-    margin: 0;
-    text: 18pt;
-    width: 257mm;
-  }
+img {
+  max-height: 124mm;
+  max-width: 184mm;
+}
 
-  #card-pattern span {
-    font-size: 7pt;
-  }
+nav {
+  width: 100%;
+  height: 20mm;
+  background-color: #0ff;
+  text-align: center;
+}
 
+#card-pattern {
+  border: 1px solid red;
+  font: 10pt 'Arial', sans-serif;
+  height: 165mm;
+  margin: 0 auto;
+  text: 18pt;
+  width: 257mm;
+}
+
+#card-pattern span {
+  font-size: 7pt;
+}
+
+/* Table */
+
+table {
+  border-collapse: collapse;
+  border-style: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+td {
+  border: 1px solid black;
+  min-height: 17mm;
+  padding: 0 18pt 8pt 18pt;
+  text-indent: -10pt;
+  vertical-align: text-top;
+}
+
+th {
+  border-width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+th:first-child {  /* force width of first column */
+  width: 20mm;
+}
+
+th:last-child {  /* force width of last column */
+  width: 60mm;
+}
+
+thead {
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+tbody tr:nth-child(1),
+tbody tr:nth-child(2) {
+  height: 17mm;
+}
+
+#card-title,
+#card-type {
+  font-weight: bold;
+  padding: 14pt 0 0 0;
+  text-align: center;
+}
+
+#card-title {
+  font-size: 18pt;
+}
+
+#card-type {
+  font-size: 14pt;
+}
+
+/* Print settings */
+
+@media print {
   body {
     margin: 0;
     padding: 0;
   }
 
-  /* Table */
-
-  #card-title,
-  #card-type {
-    font-weight: bold;
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
+  nav {
+    display: none;
   }
+}
 
-  #card-title {
-    font-size: 18pt;
-  }
+@page {
+  size: A4 landscape;
+  margin: 20mm;
+}
 
-  #card-type {
-    font-size: 14pt;
-  }
-
-  table {
-    border-collapse: collapse;
-    border-style: hidden;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    table-layout: fixed;
-    width: 100%;
-  }
-
-  table td {
-    border: 1px solid black;
-    min-height: 17mm;
-    padding: 0 18pt 8pt 18pt;
-    text-indent: -10pt;
-    vertical-align: text-top;
-  }
-
-  table th {
-    border-width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  table th:first-child {
-    width: 20mm;
-  }
-
-  table th:last-child {
-    width: 60mm;
-  }
-
-  table tr:first-child {
-    height: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  table tr:nth-child(2),
-  table tr:nth-child(3) {
-    height: 17mm
-  }
-
-  /* Print settings */
-
-  @page {
-    size: A4 landscape;
-    margin: 20mm;
-  }
-
-  @page:top {
-    margin: 25mm;
-  }
+@page:top {
+  margin: 25mm;
 }

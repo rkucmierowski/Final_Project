@@ -1,0 +1,16 @@
+{% extends 'heritage_register/base.html' %}
+
+{% block title %}
+    strona główna
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {{user.username}}
+        <p><a href="{% url 'logout' %}">Wyloguj</a></p>
+    {% else %}
+        <p>Proszę się zalogować</p>
+        <a href="{% url 'login' %}">Zaloguj</a>
+        <a href="{% url 'signup' %}">Zarejestruj</a>
+    {% endif %}
+{% endblock %}

@@ -4,13 +4,23 @@
     strona główna
 {% endblock %}
 
-{% block content %}
+{% block nav %}
+    <nav>
+    menu
+    </nav>
+{% endblock %}
+
+{% block aside %}
+    <aside>
     {% if user.is_authenticated %}
         {{user.username}}
         <p><a href="{% url 'logout' %}">Wyloguj</a></p>
     {% else %}
-        <p>Proszę się zalogować</p>
-        <a href="{% url 'login' %}">Zaloguj</a>
+        <a href="{% url 'login' %}">Zaloguj</a> |
         <a href="{% url 'signup' %}">Zarejestruj</a>
     {% endif %}
+    </aside>
+{% endblock %}
+
+{% block content %}
 {% endblock %}

@@ -1,25 +1,32 @@
 {% extends 'heritage_register/base.html' %}
 
 {% block title %}
-    strona główna
+  strona główna
 {% endblock %}
 
 {% block nav %}
-    <nav>
-    menu
-    </nav>
-{% endblock %}
+  <nav>
+    <ul class="nav">
+      <li>Nowa karta</li>
+      <li>Export</li>
+      {% if user.is_authenticated %}
+        <li>menu zalogowany</li>
+      {% else %}
+        <li>menu</li>
+      {% endif %}
+    </ul>
 
-{% block aside %}
     <aside>
-    {% if user.is_authenticated %}
-        {{user.username}}
+      {% if user.is_authenticated %}
+        {{ user.username }}
         <p><a href="{% url 'logout' %}">Wyloguj</a></p>
-    {% else %}
+      {% else %}
         <a href="{% url 'login' %}">Zaloguj</a> |
         <a href="{% url 'signup' %}">Zarejestruj</a>
-    {% endif %}
+      {% endif %}
     </aside>
+
+  </nav>
 {% endblock %}
 
 {% block content %}

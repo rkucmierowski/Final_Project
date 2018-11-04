@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from heritage_register.views import GeneratePdf, SignUp
+from heritage_register.views import CreateRelic, GeneratePdf, SignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('users/signup/', SignUp.as_view(), name='signup'),
     path('pdf/', GeneratePdf.as_view()),
+    path('relic', CreateRelic.as_view(), name='create_relic'),
 ]

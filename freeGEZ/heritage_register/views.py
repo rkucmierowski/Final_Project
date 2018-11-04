@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import View
+from django.urls import reverse_lazy
+from django.views.generic import View, CreateView
 from django.template.loader import get_template
 
 from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 from freeGEZ.settings import BASE_DIR
+
+from .forms import CustomUserCreationForm
 
 def base(request):
     if request.method == 'GET':
@@ -27,3 +30,7 @@ class GeneratePdf(View):
         pdf = html.write_pdf()
         return HttpResponse(pdf, content_type='application/pdf')
 
+class SignUp(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'

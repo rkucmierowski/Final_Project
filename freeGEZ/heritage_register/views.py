@@ -9,11 +9,17 @@ from weasyprint.fonts import FontConfiguration
 from freeGEZ.settings import BASE_DIR
 
 from .forms import CustomUserCreationForm
+from .models import Relic
 
 
 # def base(request):
 #     if request.method == 'GET':
 #         return render(request, 'heritage_register/card_pattern.html', {})
+
+class CreateRelic(CreateView):
+    model = Relic
+    fields = '__all__'
+    success_url = reverse_lazy('home')
 
 
 class GeneratePdf(View):
@@ -31,6 +37,7 @@ class GeneratePdf(View):
         html = HTML(url='http://localhost:8000/')
         pdf = html.write_pdf()
         return HttpResponse(pdf, content_type='application/pdf')
+
 
 class SignUp(CreateView):
     form_class = CustomUserCreationForm

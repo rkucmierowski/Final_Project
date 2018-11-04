@@ -1,0 +1,43 @@
+{% extends 'heritage_register/card_pattern.html' %}
+
+{% block relic-name %}
+  {{ form.name }}
+{% endblock %}
+
+{% block relic-time %}
+  {{ form.time_of_creation }}
+{% endblock %}
+
+{% block relic-place %}
+  {{ form.place }}
+{% endblock %}
+
+{% block relic-address %}
+  {{ form.address }}
+{% endblock %}
+
+{% block relic-province %}
+  {{ form.province }}
+{% endblock %}
+
+{% block relic-district %}
+  {{ form.district }}
+{% endblock %}
+
+{% block relic-municipality %}
+  {{ form.municipality }}
+{% endblock %}
+
+{% block relic-protection %}
+  {{ form.forms_of_protection }}
+{% endblock %}
+
+{% block relic-author %}
+  <p>
+    {{ user.username }}, {{ form.date.value|date:'d E Y \r.' }}
+  </p>
+{% endblock %}
+
+{% block relic-image %}
+  {{ form.image }}
+{% endblock %}

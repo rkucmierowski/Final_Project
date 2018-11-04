@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from heritage_register.views import GeneratePdf, SignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='heritage_register/home.html'), name='home'),
-    path('users/', include('heritage_register.urls')),
+    path('', TemplateView.as_view(template_name='heritage_register/card_pattern.html'), name='home'),
     path('users/', include('django.contrib.auth.urls')),
+    path('users/signup/', SignUp.as_view(), name='signup'),
+    path('pdf/', GeneratePdf.as_view()),
 ]

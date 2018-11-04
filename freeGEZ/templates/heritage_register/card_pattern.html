@@ -1,14 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head lang="pl">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="{% static 'heritage_register/style.css' %}">
-</head>
-<body>
-  <nav>
-    MENU
-  </nav>
+{% extends 'heritage_register/home.html' %}
+{% block content %}
 
   <div id="card-pattern">
     <table>
@@ -82,7 +73,6 @@
         </tr>
       </tbody>
     </table>
-
   </div>
-</body>
-</html>
+
+{% endblock %}

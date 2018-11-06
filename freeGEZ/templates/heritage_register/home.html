@@ -7,7 +7,7 @@
 {% block nav %}
   <nav>
     <ul class="nav">
-      <li>Nowa karta</li>
+      <li><a href="{% url 'relic' %}">Nowa karta</a></li>
       <li>Export</li>
       {% if user.is_authenticated %}
         <li>menu zalogowany</li>

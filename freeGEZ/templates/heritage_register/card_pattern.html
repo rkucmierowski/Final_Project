@@ -2,97 +2,107 @@
 {% block content %}
 
   <div id="card-pattern">
-    <table>
-      <!-- header -->
-      <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      </thead>
-      <!-- 1st row -->
-      <tbody>
-      <tr>
-        <td id="card-type">
-          GEZ
-        </td>
-        <td colspan="2" id="card-title">
-          KARTA ADRESOWA ZABYTKU NIERUCHOMEGO
-        </td>
-        <td rowspan="2">
-          <span>3. Miejscowość</span>
-          {% block relic-place %}
-          {% endblock %}
-        </td>
-      </tr>
-      <!-- 2nd row -->
-      <tr>
-        <td colspan="2">
-          <span>1. Nazwa</span>
-          {% block relic-name %}
-          {% endblock %}
-        </td>
-        <td>
-          <span>2. Czas powstania</span>
-          {% block relic-time %}
-          {% endblock %}
-        </td>
-      </tr>
-      <!-- 3rd row -->
-      <tr>
-        <td colspan="3" rowspan="4">
-          <span>8. Fotografia z opisem wskazującym orientację albo mapa z zaznaczonym stanowiskiem archeologicznym</span>
-          {% block relic-image %}
-          {% endblock %}
-          <img src="https://lh3.googleusercontent.com/8EEG1uJSzlBGeeZ_eaV8xXxCBbikQNYWVg238pKoxSsW78Ea2vNki33aOp27x3vM14RGncWhNYT8FO4Hh7wqXZJiBDUVGqBzBmESp0QETQ2tfKjayY9ENkzNc_hGgFQhYO-jTqZZNg_NuhIH1MlYDFUtMC0Z9E6esuyOj3_Q735zXnYzjXVbQpSaSwDvMbqsEA9CCTtnhO-rfQSmxLhpdZ5x_XKPcVGXjjxVkGyYS6MGlGfPO_BK1xNnEYYx58GpTtv25pXA6esIHv6MxBntFUmNEP8Pv_x4HEYthucXhZphrIwrHTiQ3XnxFd_n7rn5yrqAZsDHSVgMwpTaFwaj_iNzLutJmm3AgaVqPXVStGMZ9iQDX4RK1dNYpD4pNloaO0xlenSZDKWBg5Jir1glNLYiLcQcz4VOQHN5ZUNVCEV6_oi61eEiRql6PXSaGfhBu3NsunLvoIcATpteQpvls6Ksbf814OmvCLs9Czmc8Od4lFovydi_9VOQ-eQi9p4pfq-i2KeMUHTeXuVrxR2xMdvU66hd6rD9ew4h_ci9r6PhyA58lPWIwn5499h3wmurvkw-0Qeqc-SC2MUxRNx15LsYnLLMcHE=w640">
-        </td>
-        <td>
-          <span>4. Adres</span>
-          {% block relic-address %}
-          {% endblock %}
-        </td>
-      </tr>
-      <!-- 4th row -->
-      <tr>
-        <td>
-          <span>5. Przynależność administracyjna</span><br>
-          <p>
-            <span>województwo</span>
-            {% block relic-province %}
+    <form action="{% url 'relic' %}" method="POST" id="form">
+      {% csrf_token %}
+    {{ form.errors }}
+{{ form.non_field_errors }}
+      <table>
+        <!-- header -->
+        <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <!-- 1st row -->
+        <tbody>
+        <tr>
+          <td id="card-type">
+            GEZ
+          </td>
+          <td colspan="2" id="card-title">
+            KARTA ADRESOWA ZABYTKU NIERUCHOMEGO
+          </td>
+          <td rowspan="2">
+            <span>3. Miejscowość</span>
+            {% block relic-place %}
             {% endblock %}
-          </p>
-          <p>
-            <span>powiat</span>
-          {% block relic-district %}
-          {% endblock %}
-          </p>
-          <p>
-            <span>gmina</span>
-          {% block relic-municipality %}
-          {% endblock %}
-          </p>
-        </td>
-      </tr>
-      <!-- 5th row -->
-      <tr>
-        <td>
-          <span>6. Formy ochrony</span>
-          {% block relic-protection %}
-          {% endblock %}
-        </td>
-      </tr>
-      <!-- 6th row -->
-      <tr>
-        <td>
-          <span>7. Opracowanie karty adresowej (autor, data i&nbsp;podpis)</span>
-          {% block relic-author %}
-          {% endblock %}
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          </td>
+        </tr>
+        <!-- 2nd row -->
+        <tr>
+          <td colspan="2">
+            <span>1. Nazwa</span>
+            {% block relic-name %}
+            {% endblock %}
+          </td>
+          <td>
+            <span>2. Czas powstania</span>
+            {% block relic-time %}
+            {% endblock %}
+          </td>
+        </tr>
+        <!-- 3rd row -->
+        <tr>
+          <td colspan="3" rowspan="4">
+            <span>8. Fotografia z opisem wskazującym orientację albo mapa z zaznaczonym stanowiskiem archeologicznym</span>
+            {% block relic-image %}
+            {% endblock %}
+            <img src="https://lh3.googleusercontent.com/8EEG1uJSzlBGeeZ_eaV8xXxCBbikQNYWVg238pKoxSsW78Ea2vNki33aOp27x3vM14RGncWhNYT8FO4Hh7wqXZJiBDUVGqBzBmESp0QETQ2tfKjayY9ENkzNc_hGgFQhYO-jTqZZNg_NuhIH1MlYDFUtMC0Z9E6esuyOj3_Q735zXnYzjXVbQpSaSwDvMbqsEA9CCTtnhO-rfQSmxLhpdZ5x_XKPcVGXjjxVkGyYS6MGlGfPO_BK1xNnEYYx58GpTtv25pXA6esIHv6MxBntFUmNEP8Pv_x4HEYthucXhZphrIwrHTiQ3XnxFd_n7rn5yrqAZsDHSVgMwpTaFwaj_iNzLutJmm3AgaVqPXVStGMZ9iQDX4RK1dNYpD4pNloaO0xlenSZDKWBg5Jir1glNLYiLcQcz4VOQHN5ZUNVCEV6_oi61eEiRql6PXSaGfhBu3NsunLvoIcATpteQpvls6Ksbf814OmvCLs9Czmc8Od4lFovydi_9VOQ-eQi9p4pfq-i2KeMUHTeXuVrxR2xMdvU66hd6rD9ew4h_ci9r6PhyA58lPWIwn5499h3wmurvkw-0Qeqc-SC2MUxRNx15LsYnLLMcHE=w640">
+          </td>
+          <td>
+            <span>4. Adres</span>
+            {% block relic-address %}
+            {% endblock %}
+          </td>
+        </tr>
+        <!-- 4th row -->
+        <tr>
+          <td>
+            <span>5. Przynależność administracyjna</span><br>
+            <p>
+              <span>województwo</span>
+              {% block relic-province %}
+              {% endblock %}
+            </p>
+            <p>
+              <span>powiat</span>
+              {% block relic-district %}
+              {% endblock %}
+            </p>
+            <p>
+              <span>gmina</span>
+              {% block relic-municipality %}
+              {% endblock %}
+            </p>
+          </td>
+        </tr>
+        <!-- 5th row -->
+        <tr>
+          <td>
+            <span>6. Formy ochrony</span>
+            {% block relic-protection %}
+            {% endblock %}
+          </td>
+        </tr>
+        <!-- 6th row -->
+        <tr>
+          <td>
+            <span>7. Opracowanie karty adresowej (autor, data i&nbsp;podpis)</span>
+            {% block relic-author %}
+            {% endblock %}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
   </div>
 
+{% endblock %}
+
+
+{% block footer %}
+  <footer></footer>
 {% endblock %}

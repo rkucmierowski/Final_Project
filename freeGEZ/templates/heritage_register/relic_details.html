@@ -1,0 +1,57 @@
+{% extends 'heritage_register/card_pattern.html' %}
+
+{% block relic-name %}
+  {{ relic.name }}
+{% endblock %}
+
+{% block relic-time %}
+  {{ relic.time_of_creation }}
+{% endblock %}
+
+{% block relic-place %}
+  {{ relic.place }}
+{% endblock %}
+
+{% block relic-address %}
+  {{ relic.address }}
+{% endblock %}
+
+{% block relic-province %}
+  {{ relic.province }}
+{% endblock %}
+
+{% block relic-district %}
+  {{ relic.district }}
+{% endblock %}
+
+{% block relic-municipality %}
+  {{ relic.municipality }}
+{% endblock %}
+
+{% block relic-protection %}
+  {{ relic.relics_of_protection }}
+{% endblock %}
+
+{% block relic-author %}
+  <p>
+    {{ relic.author.first_name }} {{ relic.author.last_name }}, {{ relic.date|date:'d E Y \r.' }}
+  </p>
+{% endblock %}
+
+{% block relic-image %}
+  {{ relic.image }}
+{% endblock %}
+
+{% block footer %}
+  <footer>
+    {% if prev %}
+      <a href="{% url 'relic-details' prev %}">prev</a>
+    {% else %}
+      <span>prev</span>
+    {% endif %}
+    |
+    {% if next %}
+      <a href="{% url 'relic-details' next %}">next</a>
+    {% endif %}
+  </footer>
+{% endblock %}

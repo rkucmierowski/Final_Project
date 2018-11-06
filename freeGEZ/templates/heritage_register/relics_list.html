@@ -1,0 +1,48 @@
+{% extends 'heritage_register/home.html' %}
+
+{% block content %}
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="2">Opracowanie karty</th>
+    </tr>
+    <tr>
+      <th rowspan="2">Nazwa</th>
+      <th rowspan="2">Czas powstania</th>
+      <th rowspan="2">Miejscowość</th>
+      <th rowspan="2">Adress</th>
+      <th>data</th>
+      <th>autor</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for instance in object_list %}
+      <tr>
+        <td>
+          {{ instance.name }}
+        </td>
+        <td>
+          {{ instance.time_of_creation|date|default:"&mdash;" }}
+        </td>
+        <td>
+          {{ instance.place|default:"&mdash;" }}
+        </td>
+        <td>
+          {{ instance.address|default:"&mdash;" }}
+        </td>
+        <td>
+          {{ instance.date|date }}
+        </td>
+        <td>
+          {{ instance.author.first_name|default:"&mdash;" }}
+          {{ instance.author.last_name|default:"&mdash;" }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

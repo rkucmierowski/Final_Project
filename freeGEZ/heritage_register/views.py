@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import View, CreateView, DetailView
+from django.views.generic import View, CreateView, DeleteView, DetailView, ListView
 from django.template.loader import get_template
 
 from weasyprint import HTML, CSS
@@ -23,7 +23,12 @@ def get_wsdl():
     print(gmina)
 
 
-class RelicDetails(DetailView):
+class RelicsListView(ListView):
+    template_name = 'heritage_register/relics_list.html'
+    queryset = Relic.objects.all()
+
+
+class RelicDetailsView(DetailView):
     model = Relic
     template_name = 'heritage_register/relic_details.html'
 
@@ -36,6 +41,11 @@ class RelicDetails(DetailView):
         if prev:
             context['prev'] = prev[0].pk
         return context
+
+
+class RelicDeleteView(DeleteView):
+    model = Relic
+    success_url = reverse_lazy('home')
 
 
 class CreateRelic(CreateView):

@@ -20,7 +20,7 @@ from django.urls import path, include, re_path
 from django.views.generic.base import TemplateView
 
 from .settings import MEDIA_URL, MEDIA_ROOT
-from heritage_register.views import CreateRelic, GeneratePdf, RelicDetails, SignUp
+from heritage_register.views import CreateRelic, GeneratePdf, RelicDeleteView, RelicDetailsView, RelicsListView, SignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,7 @@ urlpatterns = [
     path('users/signup/', SignUp.as_view(), name='signup'),
     path('pdf/', GeneratePdf.as_view()),
     path('relic/', CreateRelic.as_view(), name='relic'),
-    re_path(r'^relic/(?P<pk>(\d)+)/', RelicDetails.as_view(), name='relic-details'),
+    re_path(r'^relics/$', RelicsListView.as_view(), name='relics-list'),
+    re_path(r'^relic/(?P<pk>(\d)+)/$', RelicDetailsView.as_view(), name='relic-details'),
+    re_path(r'^relic/(?P<pk>(\d)+)/delete/$', RelicDeleteView.as_view(), name='relic-delete'),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)

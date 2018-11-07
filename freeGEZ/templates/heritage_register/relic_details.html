@@ -53,5 +53,6 @@
     {% if next %}
       <a href="{% url 'relic-details' next %}">next</a>
     {% endif %}
+  <a href="{% url 'relic-delete' object.pk %}">X</a>
   </footer>
 {% endblock %}

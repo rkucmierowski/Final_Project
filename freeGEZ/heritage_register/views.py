@@ -25,22 +25,22 @@ def get_wsdl():
 
 
 class RelicsListView(ListView):
-    queryset = Relic.objects.all()
+    queryset = Relic.objects.all().order_by('pk')
 
 
 class RelicDetailsView(ListView):
-    model = Relic
-    template_name = 'heritage_register/switch.html'
     context_object_name = 'relics_list'
+    model = Relic
     paginate_by = 1
-    queryset = Relic.objects.all()
+    queryset = Relic.objects.all().order_by('pk')
+    template_name = 'heritage_register/switch.html'
 
 
 class RelicAllView(ListView):
-    model = Relic
-    template_name = 'heritage_register/switch.html'
     context_object_name = 'relics_list'
-    queryset = Relic.objects.all()
+    model = Relic
+    queryset = Relic.objects.all().order_by('pk')
+    template_name = 'heritage_register/switch.html'
 
 
 class RelicDeleteView(DeleteView):
@@ -49,18 +49,18 @@ class RelicDeleteView(DeleteView):
 
 
 class RelicUpdateView(UpdateView):
+    context_object_name = 'relic'
     fields = ['name','time_of_creation']
     model = Relic
-    template_name = 'heritage_register/switch.html'
-    context_object_name = 'relic'
     success_url = reverse_lazy('relic-details')  #TODO: change url to last updated page
+    template_name = 'heritage_register/switch.html'
 
 
 class CreateRelicView(CreateView):
-    model = Relic
     fields = '__all__'
-    template_name = 'heritage_register/switch.html'
+    model = Relic
     success_url = reverse_lazy('relics-list')
+    template_name = 'heritage_register/switch.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user

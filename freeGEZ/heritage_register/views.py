@@ -30,9 +30,16 @@ class RelicsListView(ListView):
 
 class RelicDetailsView(ListView):
     model = Relic
-    template_name = 'heritage_register/relic_details.html'
+    template_name = 'heritage_register/switch.html'
     context_object_name = 'relics_list'
     paginate_by = 1
+    queryset = Relic.objects.all()
+
+
+class RelicAllView(ListView):
+    model = Relic
+    template_name = 'heritage_register/switch.html'
+    context_object_name = 'relics_list'
     queryset = Relic.objects.all()
 
 
@@ -44,13 +51,15 @@ class RelicDeleteView(DeleteView):
 class RelicUpdateView(UpdateView):
     fields = ['name','time_of_creation']
     model = Relic
-    template_name = 'heritage_register/relic_update.html'
+    template_name = 'heritage_register/switch.html'
+    context_object_name = 'relic'
     success_url = reverse_lazy('relic-details')  #TODO: change url to last updated page
 
 
 class CreateRelicView(CreateView):
     model = Relic
     fields = '__all__'
+    template_name = 'heritage_register/switch.html'
     success_url = reverse_lazy('relics-list')
 
     def form_valid(self, form):
@@ -64,7 +73,7 @@ class CreateRelicView(CreateView):
 
 class GeneratePdf(View):
 
-    def get(self, request):
+    def get(self, request, pk):
         # rules=''
         # with open('{}/static/heritage_register/style.css'.format(BASE_DIR)) as f2:
         #     rules = f2.read()
@@ -73,8 +82,13 @@ class GeneratePdf(View):
         # css = CSS(string=rules,  font_config=font_conf)
         # pdf = html.write_pdf(stylesheets=[css], font_config=font_conf)
         # return HttpResponse(pdf, content_type='application/pdf')
+        url = '{}://{}/relic'.format(request.scheme, request.get_host())
+        if pk:
+            url +='/details/?page={}'.format(pk)
+        else:
+            url += '/all'
 
-        html = HTML(url='http://localhost:8000/')
+        html = HTML(url=url)
         pdf = html.write_pdf()
         return HttpResponse(pdf, content_type='application/pdf')
 

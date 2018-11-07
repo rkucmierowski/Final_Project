@@ -1,11 +1,11 @@
 {% extends 'heritage_register/home.html' %}
-{% block content %}
 
-  <div id="card-pattern">
+{% block content %}
+  <div class="card-pattern">
     <form method="POST" id="form">
       {% csrf_token %}
-    {{ form.errors }}
-{{ form.non_field_errors }}
+      {{ form.errors }}
+      {{ form.non_field_errors }}
       <table>
         <!-- header -->
         <thead>
@@ -19,10 +19,10 @@
         <!-- 1st row -->
         <tbody>
         <tr>
-          <td id="card-type">
+          <td class="card-type">
             GEZ
           </td>
-          <td colspan="2" id="card-title">
+          <td colspan="2" class="card-title">
             KARTA ADRESOWA ZABYTKU NIERUCHOMEGO
           </td>
           <td rowspan="2">
@@ -99,9 +99,4 @@
       </table>
     </form>
   </div>
-
-{% endblock %}
-
-
-{% block footer %}
 {% endblock %}

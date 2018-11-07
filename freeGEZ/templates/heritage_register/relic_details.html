@@ -1,46 +1,45 @@
 {% extends 'heritage_register/card_pattern.html' %}
 
-
 {% block relic-name %}
-  {{ relics_list.0.name }}
+  {{ relic.name }}
 {% endblock %}
 
 {% block relic-time %}
-  {{ relics_list.0.time_of_creation }}
+  {{ relic.time_of_creation }}
 {% endblock %}
 
 {% block relic-place %}
-  {{ relics_list.0.place }}
+  {{ relic.place }}
 {% endblock %}
 
 {% block relic-address %}
-  {{ relics_list.0.address }}
+  {{ relic.address }}
 {% endblock %}
 
 {% block relic-province %}
-  {{ relics_list.0.province }}
+  {{ relic.province }}
 {% endblock %}
 
 {% block relic-district %}
-  {{ relics_list.0.district }}
+  {{ relic.district }}
 {% endblock %}
 
 {% block relic-municipality %}
-  {{ relics_list.0.municipality }}
+  {{ relic.municipality }}
 {% endblock %}
 
 {% block relic-protection %}
-  {{ relics_list.0.relics_of_protection }}
+  {{ relic.relics_of_protection }}
 {% endblock %}
 
 {% block relic-author %}
   <p>
-    {{ relics_list.0.author.first_name }} {{ relics_list.0.author.last_name }}, {{ relics_list.0.date|date:'d E Y \r.' }}
+    {{ relic.author.first_name }} {{ relic.author.last_name }}, {{ relic.date|date:'d E Y \r.' }}
   </p>
 {% endblock %}
 
 {% block relic-image %}
-  {{ relics_list.0.image }}
+  {{ relic.image }}
 {% endblock %}
 
 
@@ -66,6 +65,7 @@
       {% endif %}
       <a href="" onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}">X</a>
       <a href="{% url 'relic-update' relics_list.0.pk %}">E</a>
+      <a href="{% url 'pdf' page_obj.number %}">P</a>
     {% endif %}
   </footer>
 {% endblock %}

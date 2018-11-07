@@ -9,7 +9,7 @@
     <div class="nav">
       <a href="{% url 'relic-create' %}">Nowa karta</a>
       <a href="{% url 'relic-details' %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->
-      <a>Export</a>
+      <a href="{% url 'pdf' %}">Export</a>
       {% if user.is_authenticated %}
         <a>menu zalogowany</a>
       {% else %}

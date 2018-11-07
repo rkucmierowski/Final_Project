@@ -7,8 +7,8 @@
 {% block nav %}
   <nav>
     <div class="nav">
-      <a href="{% url 'relic' %}">Nowa karta</a>
-      <a href="{% url 'relic-details' 1 %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->
+      <a href="{% url 'relic-create' %}">Nowa karta</a>
+      <a href="{% url 'relic-details' %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->
       <a>Export</a>
       {% if user.is_authenticated %}
         <a>menu zalogowany</a>

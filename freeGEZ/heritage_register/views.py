@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.urls import reverse_lazy
-from django.views.generic import View, CreateView, DeleteView, DetailView, ListView
+from django.urls import reverse_lazy, reverse
+from django.core.paginator import Paginator
+from django.views.generic import View, CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.template.loader import get_template
 
 from weasyprint import HTML, CSS
@@ -24,39 +25,38 @@ def get_wsdl():
 
 
 class RelicsListView(ListView):
-    template_name = 'heritage_register/relics_list.html'
     queryset = Relic.objects.all()
 
 
-class RelicDetailsView(DetailView):
+class RelicDetailsView(ListView):
     model = Relic
     template_name = 'heritage_register/relic_details.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        next = Relic.objects.filter(pk=self.object.pk + 1)
-        prev = Relic.objects.filter(pk=self.object.pk - 1)
-        if next:
-            context['next'] = next[0].pk
-        if prev:
-            context['prev'] = prev[0].pk
-        return context
+    context_object_name = 'relics_list'
+    paginate_by = 1
+    queryset = Relic.objects.all()
 
 
 class RelicDeleteView(DeleteView):
     model = Relic
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('relics-list')
 
 
-class CreateRelic(CreateView):
+class RelicUpdateView(UpdateView):
+    fields = ['name','time_of_creation']
+    model = Relic
+    template_name = 'heritage_register/relic_update.html'
+    success_url = reverse_lazy('relic-details')  #TODO: change url to last updated page
+
+
+class CreateRelicView(CreateView):
     model = Relic
     fields = '__all__'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('relics-list')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         print(form.data)
-        return super(CreateRelic, self).form_valid(form)
+        return super(CreateRelicView, self).form_valid(form)
 
     # def form_invalid(self, form):
     #     return HttpResponse("OO")

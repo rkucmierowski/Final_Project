@@ -1,0 +1,12 @@
+<form action="{% url 'relic-delete' relics_list.0.pk %}" method="post" class="confirm-delete-form" style="display: none">
+  {% csrf_token %}
+  <p>Czy na pewno usunąć tę kartę?</p>
+
+  <input type="submit" value="Usuń" name="confirm_delete">
+  <input type="button" value="Anuluj" name="cancel">
+</form>
+<script>
+    document.querySelector('input[name="cancel"]').addEventListener('click', function (e) {
+        this.parentElement.style.display = 'none';
+    });
+</script>

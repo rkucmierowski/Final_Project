@@ -2,7 +2,7 @@
 {% block content %}
 
   <div id="card-pattern">
-    <form action="{% url 'relic' %}" method="POST" id="form">
+    <form method="POST" id="form">
       {% csrf_token %}
     {{ form.errors }}
 {{ form.non_field_errors }}
@@ -104,5 +104,4 @@
 
 
 {% block footer %}
-  <footer></footer>
 {% endblock %}

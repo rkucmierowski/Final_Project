@@ -69,7 +69,7 @@ nav {
   color: #0051AE;
 }
 
-#card-pattern {
+.card-pattern {
   border: 1px solid red;
   font: 10pt 'Arial', 'Lato', sans-serif;
   height: 165mm;
@@ -78,7 +78,7 @@ nav {
   width: 257mm;
 }
 
-#card-pattern span, label {
+.card-pattern span, label {
   font-size: 7pt;
 }
 
@@ -142,18 +142,18 @@ tbody tr:nth-child(2) {
   height: 17mm;
 }
 
-#card-title,
-#card-type {
+.card-title,
+.card-type {
   font-weight: bold;
   padding: 14pt 0 0 0;
   text-align: center;
 }
 
-#card-title {
+.card-title {
   font-size: 18pt;
 }
 
-#card-type {
+.card-type {
   font-size: 14pt;
 }
 
@@ -161,6 +161,7 @@ tbody tr:nth-child(2) {
 
 @media print {
   body {
+    background-color: #fff;
     margin: 0;
     padding: 0;
   }
@@ -169,6 +170,10 @@ tbody tr:nth-child(2) {
   footer,
   nav {
     display: none;
+  }
+
+  .card-pattern {
+    page-break-after: always;
   }
 }
 

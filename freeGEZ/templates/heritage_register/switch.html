@@ -1,0 +1,9 @@
+{% if relics_list %}
+  {% for relic in relics_list %}
+    {% include 'heritage_register/relic_details.html' %}
+  {% endfor %}
+{% elif relic %}
+  {% include 'heritage_register/relic_update.html' %}
+{% else %}
+  {% include 'heritage_register/relic_form.html' %}
+{% endif %}

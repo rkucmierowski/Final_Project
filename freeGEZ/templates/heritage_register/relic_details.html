@@ -1,58 +1,76 @@
 {% extends 'heritage_register/card_pattern.html' %}
 
+
 {% block relic-name %}
-  {{ relic.name }}
+  {{ relics_list.0.name }}
 {% endblock %}
 
 {% block relic-time %}
-  {{ relic.time_of_creation }}
+  {{ relics_list.0.time_of_creation }}
 {% endblock %}
 
 {% block relic-place %}
-  {{ relic.place }}
+  {{ relics_list.0.place }}
 {% endblock %}
 
 {% block relic-address %}
-  {{ relic.address }}
+  {{ relics_list.0.address }}
 {% endblock %}
 
 {% block relic-province %}
-  {{ relic.province }}
+  {{ relics_list.0.province }}
 {% endblock %}
 
 {% block relic-district %}
-  {{ relic.district }}
+  {{ relics_list.0.district }}
 {% endblock %}
 
 {% block relic-municipality %}
-  {{ relic.municipality }}
+  {{ relics_list.0.municipality }}
 {% endblock %}
 
 {% block relic-protection %}
-  {{ relic.relics_of_protection }}
+  {{ relics_list.0.relics_of_protection }}
 {% endblock %}
 
 {% block relic-author %}
   <p>
-    {{ relic.author.first_name }} {{ relic.author.last_name }}, {{ relic.date|date:'d E Y \r.' }}
+    {{ relics_list.0.author.first_name }} {{ relics_list.0.author.last_name }}, {{ relics_list.0.date|date:'d E Y \r.' }}
   </p>
 {% endblock %}
 
 {% block relic-image %}
-  {{ relic.image }}
+  {{ relics_list.0.image }}
 {% endblock %}
+
 
 {% block footer %}
   <footer>
-    {% if prev %}
-      <a href="{% url 'relic-details' prev %}">prev</a>
-    {% else %}
-      <span>prev</span>
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">prev</a>
+      {% else %}
+        <span>prev</span>
+      {% endif %}
+
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <span>{{ i }}</span>
+        {% else %}
+          <a href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+      {% endif %}
+      <a href="" onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}">X</a>
+      <a href="{% url 'relic-update' relics_list.0.pk %}">E</a>
     {% endif %}
-    |
-    {% if next %}
-      <a href="{% url 'relic-details' next %}">next</a>
-    {% endif %}
-  <a href="{% url 'relic-delete' object.pk %}">X</a>
   </footer>
+{% endblock %}
+
+{% block content %}
+  {{ block.super }}
+  {% include 'heritage_register/relic_confirm_delete.html' %}
 {% endblock %}

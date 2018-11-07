@@ -1,0 +1,7 @@
+{% extends 'heritage_register/relic_input.html' %}
+
+{% block footer %}
+  <footer>
+    <input type="submit" name="submit" value="Zapisz" form="form" formaction="{% url 'relic-update' form.instance.pk %}">
+  </footer>
+{% endblock %}

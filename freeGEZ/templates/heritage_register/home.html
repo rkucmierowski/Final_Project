@@ -6,16 +6,16 @@
 
 {% block nav %}
   <nav>
-    <ul class="nav">
-      <li><a href="{% url 'relic' %}">Nowa karta</a></li>
-      <li><a href="{% url 'relic-details' 1 %}">Przeglądanie kart</a></li>  <!-- TODO: change 1 to first object, if exists-->
-      <li>Export</li>
+    <div class="nav">
+      <a href="{% url 'relic' %}">Nowa karta</a>
+      <a href="{% url 'relic-details' 1 %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->
+      <a>Export</a>
       {% if user.is_authenticated %}
-        <li>menu zalogowany</li>
+        <a>menu zalogowany</a>
       {% else %}
-        <li>menu</li>
+        <a>menu</a>
       {% endif %}
-    </ul>
+    </div>
 
     <aside>
       {% if user.is_authenticated %}

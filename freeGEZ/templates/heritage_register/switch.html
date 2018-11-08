@@ -1,9 +1,55 @@
+{#{% load static %}#}
+{#{% load common %}#}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head lang="pl">#}
+{#  <meta charset="utf-8">#}
+{#  <link rel="stylesheet" href="{% static 'heritage_register/style.css' %}">#}
+{#  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" id="font-awsome">#}
+{#  <title>freeGEZ &bullet; {% block title %}{% endblock %}</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#    {% include 'heritage_register/home.html' %}#}
+{#{% block nav %}#}
+{#{% endblock %}#}
+{##}
+{#{% block aside %}#}
+{#{% endblock %}#}
+{##}
+{#{% block header %}#}
+{#{% endblock %}#}
+{% extends 'heritage_register/home.html' %}
+  {% block content %}
+{#  {% endblock %}#}
 {% if relics_list %}
+<main>
   {% for relic in relics_list %}
     {% include 'heritage_register/relic_details.html' %}
   {% endfor %}
+</main>
+    {% include 'heritage_register/footer.html' %}
 {% elif relic %}
+  <main>
+  {% include 'heritage_register/relic_input.html' %}
+  </main>
   {% include 'heritage_register/relic_update.html' %}
+{% elif relics_table %}
+  <main>
+  {% include 'heritage_register/relic_list.html' %}
+  </main>
+  <footer></footer>
 {% else %}
+  <main>
+  {% include 'heritage_register/relic_input.html' %}
+  </main>
   {% include 'heritage_register/relic_form.html' %}
 {% endif %}
+{#<footer>#}
+{#{% block footer %}#}
+{% endblock %}
+{#</footer>#}
+{#</body>#}
+{#</html>#}
+
+

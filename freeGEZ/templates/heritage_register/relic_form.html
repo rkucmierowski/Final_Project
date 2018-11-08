@@ -1,9 +1,9 @@
-{% extends 'heritage_register/relic_input.html' %}
+{#{% extends 'heritage_register/relic_input.html' %}#}
 
-{% block footer %}
+{#{% block footer %}#}
   <footer>
     <input type="submit" name="submit" value="Zapisz" form="form" formaction="{% url 'relic-create' %}">
     <input type="submit" name="cancel" value="Anuluj" form="form" formnovalidate formmethod="get" formaction="{% url 'relics-list' %}">
 {#  <input type="button" value="Cancel" onclick="window.location.assign({% url 'relics-list' %})">#}
   </footer>
-{% endblock %}
+{#{% endblock %}#}

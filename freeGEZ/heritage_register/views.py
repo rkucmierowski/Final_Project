@@ -25,7 +25,9 @@ def get_wsdl():
 
 
 class RelicsListView(ListView):
+    context_object_name = 'relics_table'
     queryset = Relic.objects.all().order_by('pk')
+    template_name = 'heritage_register/switch.html'
 
 
 class RelicDetailsView(ListView):
@@ -50,7 +52,16 @@ class RelicDeleteView(DeleteView):
 
 class RelicUpdateView(UpdateView):
     context_object_name = 'relic'
-    fields = ['name', 'time_of_creation', 'image']
+    fields = [
+        'name',
+        'time_of_creation',
+        'place',
+        'address',
+        'forms_of_protection',
+        'image',
+        'description',
+    ]
+
     model = Relic
     success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page
     template_name = 'heritage_register/switch.html'
@@ -91,6 +102,7 @@ class GeneratePdf(View):
         # css = CSS(string=rules,  font_config=font_conf)
         # pdf = html.write_pdf(stylesheets=[css], font_config=font_conf)
         # return HttpResponse(pdf, content_type='application/pdf')
+
         url = '{}://{}/relic'.format(request.scheme, request.get_host())
         if pk:
             url += '/details/?page={}'.format(pk)

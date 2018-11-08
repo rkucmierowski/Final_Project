@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="card-pattern">
-    <form method="POST" id="form">
+    <form method="POST" id="form" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.errors }}
       {{ form.non_field_errors }}
@@ -48,9 +48,7 @@
         <tr>
           <td colspan="3" rowspan="4">
             <span>8. Fotografia z opisem wskazującym orientację albo mapa z zaznaczonym stanowiskiem archeologicznym</span>
-            {% block relic-image %}
-            {% endblock %}
-            <img src="https://lh3.googleusercontent.com/8EEG1uJSzlBGeeZ_eaV8xXxCBbikQNYWVg238pKoxSsW78Ea2vNki33aOp27x3vM14RGncWhNYT8FO4Hh7wqXZJiBDUVGqBzBmESp0QETQ2tfKjayY9ENkzNc_hGgFQhYO-jTqZZNg_NuhIH1MlYDFUtMC0Z9E6esuyOj3_Q735zXnYzjXVbQpSaSwDvMbqsEA9CCTtnhO-rfQSmxLhpdZ5x_XKPcVGXjjxVkGyYS6MGlGfPO_BK1xNnEYYx58GpTtv25pXA6esIHv6MxBntFUmNEP8Pv_x4HEYthucXhZphrIwrHTiQ3XnxFd_n7rn5yrqAZsDHSVgMwpTaFwaj_iNzLutJmm3AgaVqPXVStGMZ9iQDX4RK1dNYpD4pNloaO0xlenSZDKWBg5Jir1glNLYiLcQcz4VOQHN5ZUNVCEV6_oi61eEiRql6PXSaGfhBu3NsunLvoIcATpteQpvls6Ksbf814OmvCLs9Czmc8Od4lFovydi_9VOQ-eQi9p4pfq-i2KeMUHTeXuVrxR2xMdvU66hd6rD9ew4h_ci9r6PhyA58lPWIwn5499h3wmurvkw-0Qeqc-SC2MUxRNx15LsYnLLMcHE=w640">
+            {% block relic-image %}{% endblock %}
           </td>
           <td>
             <span>4. Adres</span>

@@ -50,10 +50,13 @@ class RelicDeleteView(DeleteView):
 
 class RelicUpdateView(UpdateView):
     context_object_name = 'relic'
-    fields = ['name','time_of_creation']
+    fields = ['name', 'time_of_creation', 'image']
     model = Relic
-    success_url = reverse_lazy('relic-details')  #TODO: change url to last updated page
+    success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page
     template_name = 'heritage_register/switch.html'
+
+
+from django.conf import settings
 
 
 class CreateRelicView(CreateView):
@@ -64,9 +67,15 @@ class CreateRelicView(CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print(form.data)
-        return super(CreateRelicView, self).form_valid(form)
+        print(self.request.FILES['image'].name)
+        print(type(self.request.FILES['image'].name))
 
+        print(settings.MEDIA_URL)
+        print(type(settings.MEDIA_URL))
+        print(settings.MEDIA_ROOT)
+        print(type(settings.MEDIA_ROOT))
+        form.image = self.request.FILES['image'].name
+        return super(CreateRelicView, self).form_valid(form)
     # def form_invalid(self, form):
     #     return HttpResponse("OO")
 
@@ -84,7 +93,7 @@ class GeneratePdf(View):
         # return HttpResponse(pdf, content_type='application/pdf')
         url = '{}://{}/relic'.format(request.scheme, request.get_host())
         if pk:
-            url +='/details/?page={}'.format(pk)
+            url += '/details/?page={}'.format(pk)
         else:
             url += '/all'
 

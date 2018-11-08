@@ -47,6 +47,14 @@ nav {
   width: 100%;
 }
 
+textarea {
+
+}
+
+#form {
+  height:165mm;
+}
+
 .nav {
   font-size: 14pt;
   height: 100%;
@@ -94,6 +102,10 @@ nav {
 
 .confirm-delete-form input {
   display: inline-block;
+}
+
+.page-nav {
+  font-size: 18pt;
 }
 
 /* Table */

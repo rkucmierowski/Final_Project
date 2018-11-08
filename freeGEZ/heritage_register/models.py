@@ -25,5 +25,5 @@ class Relic(models.Model):
     forms_of_protection = models.TextField(null=True, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, related_name='relics', blank=True)
     date = models.DateField(default=date.today, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='')
     description = models.CharField(max_length=128, null=True, blank=True)

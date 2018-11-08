@@ -24,7 +24,8 @@ from heritage_register.views import CreateRelicView, GeneratePdf, RelicAllView, 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='heritage_register/card_pattern.html'), name='home'),
+    # path('', TemplateView.as_view(template_name='heritage_register/card_pattern.html'), name='home'),
+    path('', RelicsListView.as_view(), name='home'),
     path('users/', include('django.contrib.auth.urls')),
     path('users/signup/', SignUp.as_view(), name='signup'),
     re_path(r'^pdf/(?P<pk>(\d)+)*$', GeneratePdf.as_view(), name='pdf'),

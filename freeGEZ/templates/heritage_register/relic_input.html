@@ -1,4 +1,5 @@
 {% extends 'heritage_register/card_pattern.html' %}
+{% load widget_tweaks %}
 
 {% block relic-name %}
   {{ form.name }}
@@ -29,7 +30,7 @@
 {% endblock %}
 
 {% block relic-protection %}
-  {{ form.forms_of_protection }}
+  {{ form.forms_of_protection|attr:"rows:3"|attr:"cols:24" }}
 {% endblock %}
 
 {% block relic-author %}
@@ -40,6 +41,7 @@
 
 {% block relic-image %}
   {{ form.image }}
+  {{ form.description.label }}{{ form.description }}
 {% endblock %}
 
 <!-- set form action -->

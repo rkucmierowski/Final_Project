@@ -48,43 +48,43 @@
   <footer>
     {% if is_paginated %}
 
-      {% if page_obj.has_previous %}
-        {% set prefix = 'href="?page=' %}
-        {% set href1 = 1 %}
-        {% set href2 = page_obj.previous_page_number %}
-        {% set suffix = '"' %}
-      {% endif %}
-
-      <a {{ prefix }}{{ href1 }}{{suffix}} class="page-nav" title="pierwsza karta">&#x23ee;</a>
-      <a {{ prefix }}{{ href2 }}{{suffix}} class="page-nav" title="poprzednia karta">&#x23ea;</a>
-
-
-      {% for i in paginator.page_range %}
-        {% if page_obj.number == i %}
-          <span>{{ i }}</span>
-        {% else %}
-          <a href="?page={{ i }}">{{ i }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {#      <input type="number" name="page_number" value="{{ page_obj.number }}">#}
-
-      {% if page_obj.has_next %}
-        {% set prefix2 = 'href="?page=' %}
-        {% set href3 = page_obj.next_page_number %}
-        {% set href4 = paginator.num_pages %}
-        {% set suffix2 = '"' %}
-      {% endif %}
-
-      <a {{ prefix2 }}{{ href3 }}{{suffix2}} class="page-nav" title="następna karta">&#x23e9;</a>
-      <a {{ prefix2 }}{{ href4 }}{{suffix2}} class="page-nav" title="ostatnia karta">&#x23ed;</a>
-
-
-      <a href=""
-         onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}">X</a>
-      <a href="{% url 'relic-update' relics_list.0.pk %}">E</a>
-      <a href="{% url 'pdf' page_obj.number %}">P</a>
+    {% if page_obj.has_previous %}
+      {% set prefix = 'href="?page=' %}
+      {% set href1 = 1 %}
+      {% set href2 = page_obj.previous_page_number %}
+      {% set suffix = '"' %}
     {% endif %}
+
+    <a {{ prefix }}{{ href1 }}{{ suffix }} class="page-nav fa fa-fast-backward" title="pierwsza karta"></a>
+    <a {{ prefix }}{{ href2 }}{{ suffix }} class="page-nav fa fa-backward" title="poprzednia karta"></a>
+
+
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <span>{{ i }}</span>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {#      <input type="number" name="page_number" value="{{ page_obj.number }}">#}
+
+    {% if page_obj.has_next %}
+      {% set prefix2 = 'href="?page=' %}
+      {% set href3 = page_obj.next_page_number %}
+      {% set href4 = paginator.num_pages %}
+      {% set suffix2 = '"' %}
+    {% endif %}
+
+    <a {{ prefix2 }}{{ href3 }}{{ suffix2 }} class="page-nav fa fa-forward" title="następna karta"></a>
+    <a {{ prefix2 }}{{ href4 }}{{ suffix2 }} class="page-nav fa fa-fast-forward" title="ostatnia karta"></a>
+
+
+    <a href=""
+       onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}" class="page-nav fas fa-trash-alt"></a>
+    <a href="{% url 'relic-update' relics_list.0.pk %}" class="page-nav fas fa-edit"></a>
+    <a href="{% url 'pdf' page_obj.number %}" class="page-nav fa fa-file-pdf"></a>
+{% endif %}
   </footer>
 {% endblock %}
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
@@ -43,12 +44,14 @@ class RelicAllView(ListView):
     template_name = 'heritage_register/switch.html'
 
 
-class RelicDeleteView(DeleteView):
+class RelicDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Relic
     success_url = reverse_lazy('relics-list')
 
 
-class RelicUpdateView(UpdateView):
+class RelicUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     context_object_name = 'relic'
     fields = ['name', 'time_of_creation', 'image']
     model = Relic
@@ -59,7 +62,8 @@ class RelicUpdateView(UpdateView):
 from django.conf import settings
 
 
-class CreateRelicView(CreateView):
+class CreateRelicView(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     fields = '__all__'
     model = Relic
     success_url = reverse_lazy('relics-list')

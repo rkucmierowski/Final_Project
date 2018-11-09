@@ -6,31 +6,31 @@
 {% endblock %}
 
 {% block relic-time %}
-  {{ relic.time_of_creation }}
+  {{ relic.time_of_creation|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-place %}
-  {{ relic.place }}
+  {{ relic.place|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-address %}
-  {{ relic.address }}
+  {{ relic.address|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-province %}
-  {{ relic.province }}
+  {{ relic.province|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-district %}
-  {{ relic.district }}
+  {{ relic.district|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-municipality %}
-  {{ relic.municipality }}
+  {{ relic.municipality|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-protection %}
-  {{ relic.relics_of_protection }}
+  {{ relic.forms_of_protection|default_if_none:"" }}
 {% endblock %}
 
 {% block relic-author %}
@@ -40,14 +40,17 @@
 {% endblock %}
 
 {% block relic-image %}
-  <img src="{{ MEDIA_URL }}{{ relic.image }}">
+  {% if relic.image %}
+    <img src="{{ MEDIA_URL }}{{ relic.image }}">
+    <p>{{ relic.description|default_if_none:"" }}</p>
+  {% endif %}
 {% endblock %}
 
 
 {% block footer %}
   <footer>
-    {% if is_paginated %}
-
+    {#    {% if is_paginated %}#}
+    <a href="{% url 'home' %}" class="page-nav fa fa-home"></a>
     {% if page_obj.has_previous %}
       {% set prefix = 'href="?page=' %}
       {% set href1 = 1 %}
@@ -59,13 +62,14 @@
     <a {{ prefix }}{{ href2 }}{{ suffix }} class="page-nav fa fa-backward" title="poprzednia karta"></a>
 
 
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <span>{{ i }}</span>
-      {% else %}
-        <a href="?page={{ i }}">{{ i }}</a>
-      {% endif %}
-    {% endfor %}
+    {#      {% for i in paginator.page_range %}#}
+    {#        {% if page_obj.number == i %}#}
+    {#          <span>{{ i }}</span>#}
+    {#        {% else %}#}
+    {#          <a href="?page={{ i }}">{{ i }}</a>#}
+    {#        {% endif %}#}
+    {#      {% endfor %}#}
+    <a>karta {{ page_obj.number }} z {{ paginator.num_pages }}</a>
 
     {#      <input type="number" name="page_number" value="{{ page_obj.number }}">#}
 
@@ -79,12 +83,15 @@
     <a {{ prefix2 }}{{ href3 }}{{ suffix2 }} class="page-nav fa fa-forward" title="następna karta"></a>
     <a {{ prefix2 }}{{ href4 }}{{ suffix2 }} class="page-nav fa fa-fast-forward" title="ostatnia karta"></a>
 
-
-    <a href=""
-       onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}" class="page-nav fas fa-trash-alt"></a>
-    <a href="{% url 'relic-update' relics_list.0.pk %}" class="page-nav fas fa-edit"></a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'relic-create' %}" class="page-nav fa fa-file"></a>
+      <a href=""
+         onclick="{event.preventDefault(); document.querySelector('.confirm-delete-form').style.display='block';}"
+         class="page-nav fas fa-trash-alt"></a>
+      <a href="{% url 'relic-update' relics_list.0.pk %}" class="page-nav fas fa-edit"></a>
+    {% endif %}
     <a href="{% url 'pdf' page_obj.number %}" class="page-nav fa fa-file-pdf"></a>
-{% endif %}
+    {#    {% endif %}#}
   </footer>
 {% endblock %}
 

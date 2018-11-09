@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="{% static 'heritage_register/style.css' %}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
   <title>freeGEZ &bullet; {% block title %}{% endblock %}</title>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+     document.querySelectorAll('#all_relic tbody tr td:first-child a').forEach((e,i) => e.href += '?page='+Number.parseInt(i+1).toString());
+  });
+</script>
 </head>
 <body>
 

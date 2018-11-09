@@ -1,7 +1,7 @@
 {% extends 'heritage_register/home.html' %}
 
 {% block content %}
-  <table>
+  <table id="all_relic">
     <thead>
     <tr>
       <th></th>
@@ -21,9 +21,10 @@
     </thead>
     <tbody>
     {% for instance in object_list %}
+
       <tr>
-        <td>
-          {{ instance.name }}
+        <td><a href="{% url 'relic-details' %}">
+          {{ instance.name }}</a>
         </td>
         <td>
           {{ instance.time_of_creation|date|default:"&mdash;" }}
@@ -45,4 +46,10 @@
     {% endfor %}
     </tbody>
   </table>
+{% endblock %}
+
+{% block footer %}
+  <footer>
+    <a href="{% url 'pdf' %}" class="page-nav fa fa-file-pdf"></a>
+  </footer>
 {% endblock %}

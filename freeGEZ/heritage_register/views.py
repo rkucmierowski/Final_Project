@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
@@ -27,22 +29,22 @@ def get_wsdl():
 class RelicsListView(ListView):
     context_object_name = 'relics_table'
     queryset = Relic.objects.all().order_by('pk')
-    template_name = 'heritage_register/switch.html'
+    template_name = 'heritage_register/base.html'
 
 
 class RelicDetailsView(ListView):
-    context_object_name = 'relics_list'
+    context_object_name = 'list_relics'
     model = Relic
     paginate_by = 1
     queryset = Relic.objects.all().order_by('pk')
-    template_name = 'heritage_register/switch.html'
+    template_name = 'heritage_register/base.html'
 
 
 class RelicAllView(ListView):
     context_object_name = 'relics_list'
     model = Relic
     queryset = Relic.objects.all().order_by('pk')
-    template_name = 'heritage_register/switch.html'
+    template_name = 'heritage_register/base.html'
 
 
 class RelicDeleteView(DeleteView):
@@ -51,7 +53,7 @@ class RelicDeleteView(DeleteView):
 
 
 class RelicUpdateView(UpdateView):
-    context_object_name = 'relic'
+    context_object_name = 'relic_update'
     fields = [
         'name',
         'time_of_creation',
@@ -64,20 +66,25 @@ class RelicUpdateView(UpdateView):
 
     model = Relic
     success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page
-    template_name = 'heritage_register/switch.html'
+    template_name = 'heritage_register/base.html'
 
 
 from django.conf import settings
 
 
-class CreateRelicView(CreateView):
+class CreateRelicView(LoginRequiredMixin, CreateView):
+    context_object_name = 'relic_create'
     fields = '__all__'
+    login_url = reverse_lazy('login')
     model = Relic
     success_url = reverse_lazy('relics-list')
-    template_name = 'heritage_register/switch.html'
+    template_name = 'heritage_register/base.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.province = self.request.user.province
+        form.instance.district = self.request.user.district
+        form.instance.municipality = self.request.user.municipality
         # print(self.request.FILES['image'].name)
         # print(type(self.request.FILES['image'].name))
         #

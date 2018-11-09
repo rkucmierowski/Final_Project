@@ -6,16 +6,16 @@
 
 {% block nav %}
   <nav>
-    <div class="nav">
-      <a href="{% url 'relic-create' %}">Nowa karta</a>
-      <a href="{% url 'relic-details' %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->
+    <div class="nav">{% block inner %}{% endblock %}
+{#      <a href="{% url 'relic-create' %}">Nowa karta</a>#}
+{#      <a href="{% url 'relic-details' %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->#}
 {#      <a href="{% url 'pdf' %}">Export</a>#}
     </div>
 
     <aside>
       {% if user.is_authenticated %}
-        {{ user.username }}
-        <p><a href="{% url 'logout' %}">Wyloguj</a></p>
+        <p>Zalogowano: <span>{{ user.username }}</span><br>
+        <a href="{% url 'logout' %}" class="fa fa-sign-out-alt" title="Wyloguj"> wyloguj</a></p>
       {% else %}
         <a href="{% url 'login' %}">Zaloguj</a> |
         <a href="{% url 'signup' %}">Zarejestruj</a>

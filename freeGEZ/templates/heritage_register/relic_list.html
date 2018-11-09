@@ -4,18 +4,18 @@
   <table id="all_relic">
     <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th colspan="2">Opracowanie karty</th>
-    </tr>
-    <tr>
       <th rowspan="2">Nazwa</th>
-      <th rowspan="2">Czas powstania</th>
+{#      <th></th>#}
       <th rowspan="2">Miejscowość</th>
       <th rowspan="2">Adress</th>
-      <th>data</th>
+      <th colspan="2" class="opr">Opracowanie karty</th>
+    </tr>
+    <tr>
+{#      <th></th>#}
+{#      <th></th>#}
+{#      <th></th>#}
+{#      <th rowspan="2">Czas powstania</th>#}
+      <th class="date">data</th>
       <th>autor</th>
     </tr>
     </thead>
@@ -26,9 +26,9 @@
         <td><a href="{% url 'relic-details' %}">
           {{ instance.name }}</a>
         </td>
-        <td>
-          {{ instance.time_of_creation|date|default:"&mdash;" }}
-        </td>
+{#        <td>#}
+{#          {{ instance.time_of_creation|date|default:"&mdash;" }}#}
+{#        </td>#}
         <td>
           {{ instance.place|default:"&mdash;" }}
         </td>
@@ -36,7 +36,7 @@
           {{ instance.address|default:"&mdash;" }}
         </td>
         <td>
-          {{ instance.date|date }}
+          {{ instance.date|date }} r.
         </td>
         <td>
           {{ instance.author.first_name|default:"&mdash;" }}
@@ -48,8 +48,8 @@
   </table>
 {% endblock %}
 
-{% block footer %}
-  <footer>
+{% block inner %}
+{#  <nav>#}
     <a href="{% url 'pdf' %}" class="page-nav fa fa-file-pdf"></a>
-  </footer>
+{#  </nav>#}
 {% endblock %}

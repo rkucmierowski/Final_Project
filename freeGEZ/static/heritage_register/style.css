@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Lato');
 
+
 body {
   background-color: #F6F6F6;
 }
@@ -12,9 +13,23 @@ main {
 }
 
 aside {
+  color: #fff;
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+
+aside a {
+  color: #fff;
+  text-decoration: none;
+}
+
+aside a::after {
+  font-family: 'Do Hyeon', sans-serif;}
+
+aside span {
+  font-size: large;
+  font-weight: bold;
 }
 
 footer {
@@ -75,13 +90,13 @@ nav {
   text-decoration: none;
 }
 
-.nav a:hover {
+.nav a[href]:hover {
   background-color: #fff;
   color: #0051AE;
 }
 
 .card-pattern {
-  border: 1px solid red;
+  border: 1px solid black;
   font: 10pt 'Arial', 'Lato', sans-serif;
   height: 165mm;
   margin: 0 auto;
@@ -113,11 +128,42 @@ nav {
   text-decoration: none;
 }
 
-.page-nav:hover {
-  color: goldenrod;
-}
+/*.page-nav:hover {*/
+  /*color: goldenrod;*/
+/*}*/
 
 /* Table */
+#all_relic {
+  border-collapse: collapse;
+  border-style: solid;
+  font-size: small;
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+  margin: 80px 0 0 0;
+  padding: 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+#all_relic td {
+  border: 1px solid black;
+  min-height: 17mm;
+  padding: 0 18pt 8pt 18pt;
+  text-indent: -10pt;
+  vertical-align: text-top;
+}
+
+#all_relic th {
+  border: 1px solid black;
+}
+
+#all_relic th:first-child {
+  min-width: 400px;
+}
+
+.opr {
+  min-width: 280px;
+}
 
 table {
   border-collapse: collapse;
@@ -137,7 +183,7 @@ td {
   vertical-align: text-top;
 }
 
-th {
+.card-pattern th {
   border-width: 0;
   height: 0;
   margin: 0;
@@ -152,14 +198,14 @@ th:last-child { /* force width of last column */
   width: 60mm;
 }
 
-thead {
+.card-pattern thead {
   height: 0;
   margin: 0;
   padding: 0;
 }
 
-tbody tr:nth-child(1),
-tbody tr:nth-child(2) {
+.card-pattern tbody tr:nth-child(1),
+.card-pattern tbody tr:nth-child(2) {
   height: 17mm;
 }
 

@@ -47,8 +47,8 @@
 {% endblock %}
 
 
-{% block footer %}
-  <footer>
+{% block inner %}
+{#  <footer>#}
     {#    {% if is_paginated %}#}
     <a href="{% url 'home' %}" class="page-nav fa fa-home"></a>
     {% if page_obj.has_previous %}
@@ -92,7 +92,7 @@
     {% endif %}
     <a href="{% url 'pdf' page_obj.number %}" class="page-nav fa fa-file-pdf"></a>
     {#    {% endif %}#}
-  </footer>
+{#  </footer>#}
 {% endblock %}
 
 {% block content %}

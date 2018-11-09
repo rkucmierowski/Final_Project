@@ -12,8 +12,10 @@ class CustomUserCreationForm(UserCreationForm):
                   'first_name',
                   'last_name',
                   'email',
-                  'office',
-                  'teryt']
+                  # 'office',
+                  'province',
+                  'district',
+                  'municipality']
 
 
 class CustomUserChangeForm(UserChangeForm):

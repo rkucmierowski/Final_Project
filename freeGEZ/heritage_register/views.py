@@ -78,13 +78,13 @@ class CreateRelicView(CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print(self.request.FILES['image'].name)
-        print(type(self.request.FILES['image'].name))
-
-        print(settings.MEDIA_URL)
-        print(type(settings.MEDIA_URL))
-        print(settings.MEDIA_ROOT)
-        print(type(settings.MEDIA_ROOT))
+        # print(self.request.FILES['image'].name)
+        # print(type(self.request.FILES['image'].name))
+        #
+        # print(settings.MEDIA_URL)
+        # print(type(settings.MEDIA_URL))
+        # print(settings.MEDIA_ROOT)
+        # print(type(settings.MEDIA_ROOT))
         form.image = self.request.FILES['image'].name
         return super(CreateRelicView, self).form_valid(form)
     # def form_invalid(self, form):

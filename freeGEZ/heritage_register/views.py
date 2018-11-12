@@ -28,6 +28,12 @@ def get_wsdl():
 class RelicsListView(ListView):
     queryset = Relic.objects.all().order_by('pk')
 
+    def get(self, request, *args, **kwargs):
+        if request.session.get('page'):
+            print(request.session.get('page'))
+            del request.session['page']
+        return super().get(request)
+
 
 class RelicDetailsView(ListView):
     context_object_name = 'relics_list'
@@ -35,6 +41,13 @@ class RelicDetailsView(ListView):
     paginate_by = 1
     queryset = Relic.objects.all().order_by('pk')
     template_name = 'heritage_register/switch.html'
+
+
+    def get(self, request, *args, **kwargs):
+        super(RelicDetailsView, self).get(self, request, *args, **kwargs)
+        context = self.get_context_data()
+        request.session['page'] = str(context['page_obj'].number)
+        return self.render_to_response(context)
 
 
 class RelicAllView(ListView):
@@ -58,8 +71,10 @@ class RelicUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page
     template_name = 'heritage_register/switch.html'
 
-
-from django.conf import settings
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RelicUpdateView, self).get_context_data()
+        context.update({'back_page': self.request.session['page']})
+        return super().get_context_data(**context)
 
 
 class CreateRelicView(LoginRequiredMixin, CreateView):
@@ -71,17 +86,25 @@ class CreateRelicView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print(self.request.FILES['image'].name)
-        print(type(self.request.FILES['image'].name))
-
-        print(settings.MEDIA_URL)
-        print(type(settings.MEDIA_URL))
-        print(settings.MEDIA_ROOT)
-        print(type(settings.MEDIA_ROOT))
-        form.image = self.request.FILES['image'].name
+        try:
+            form.image = self.request.FILES['image'].name
+        except:
+            form.image = 'blank.png'
         return super(CreateRelicView, self).form_valid(form)
-    # def form_invalid(self, form):
-    #     return HttpResponse("OO")
+
+    def get_initial(self):
+        initial = super(CreateRelicView, self).get_initial()
+        initial['province'] = 'mazowieckie'
+        initial['district'] = 'wyszkowski'
+        initial['municipality'] = 'Zabrodzie'
+        initial['image'] = 'blank.png'
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateRelicView, self).get_context_data()
+        if self.request.session.get('page'):
+            context.update({'back_page': self.request.session['page']})
+        return super().get_context_data(**context)
 
 
 class GeneratePdf(View):

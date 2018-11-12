@@ -1,31 +1,40 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head lang="pl">
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'heritage_register/style.css' %}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
   <title>freeGEZ &bullet; {% block title %}{% endblock %}</title>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-     document.querySelectorAll('#all_relic tbody tr td:first-child a').forEach((e,i) => e.href += '?page='+Number.parseInt(i+1).toString());
-  });
-</script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('#all_relic tbody tr td:first-child a').forEach((e, i) => e.href += '?page=' + Number.parseInt(i + 1).toString());
+      });
+  </script>
 </head>
 <body>
 
-{% block nav %}
-{% endblock %}
-
-{% block aside %}
-{% endblock %}
+<header>
+  <nav>
+    {% block nav %}
+    {% endblock %}
+  </nav>
+  <aside>
+    {% block aside %}
+    {% endblock %}
+  </aside>
+</header>
 
 <main>
   {% block content %}
   {% endblock %}
 </main>
 
-{% block footer %}
-{% endblock %}
+{#<footer>#}
+{#  {% block footer %}#}
+{#  {% endblock %}#}
+{#</footer>#}
+
 </body>
 </html>

@@ -1,29 +1,13 @@
 {% extends 'heritage_register/base.html' %}
 
-{% block title %}
-  strona główna
-{% endblock %}
-
-{% block nav %}
-  <nav>
-    <div class="nav">{% block inner %}{% endblock %}
-{#      <a href="{% url 'relic-create' %}">Nowa karta</a>#}
-{#      <a href="{% url 'relic-details' %}">Przeglądanie kart</a>  <!-- TODO: change 1 to first object, if exists-->#}
-{#      <a href="{% url 'pdf' %}">Export</a>#}
-    </div>
-
-    <aside>
-      {% if user.is_authenticated %}
-        <p>Zalogowano: <span>{{ user.username }}</span><br>
-        <a href="{% url 'logout' %}" class="fa fa-sign-out-alt" title="Wyloguj"> wyloguj</a></p>
-      {% else %}
-        <a href="{% url 'login' %}">Zaloguj</a> |
-        <a href="{% url 'signup' %}">Zarejestruj</a>
-      {% endif %}
-    </aside>
-
-  </nav>
-{% endblock %}
-
-{% block content %}
+{% block aside %}
+  <aside>
+    {% if user.is_authenticated %}
+      Zalogowano: <span>{{ user.username }}</span><br>
+      <a href="{% url 'logout' %}" class="fa fa-sign-out-alt" title="wyloguj"> wyloguj</a>
+    {% else %}
+      <a href="{% url 'login' %}">Zaloguj</a>
+      {#        <a href="{% url 'signup' %}">Zarejestruj</a>#}
+    {% endif %}
+  </aside>
 {% endblock %}

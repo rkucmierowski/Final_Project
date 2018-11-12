@@ -1,10 +1,8 @@
 {% extends 'heritage_register/relic_input.html' %}
 
-{% block footer %}
-  <footer>
-    <input type="submit" name="submit" value="Zapisz" form="form" formaction="{% url 'relic-update' form.instance.pk %}">
-
-    <input type="submit" name="cancel" value="Anuluj" form="form" formnovalidate formmethod="get" formaction="{% url 'relic-details' %}">
-{#  <input type="button" value="Cancel" onclick="window.location.assign({% url 'relics-list' %})">#}
-  </footer>
+{% block nav %}
+  <input type="hidden" name="page" value="{{ back_page }}" form="form">
+  <input type="submit" name="submit" value="Zapisz" form="form" formaction="{% url 'relic-update' form.instance.pk %}">
+  <input type="submit" name="cancel" value="Anuluj" form="form" formnovalidate formmethod="get"
+         formaction="{% url 'relic-details' %}">
 {% endblock %}

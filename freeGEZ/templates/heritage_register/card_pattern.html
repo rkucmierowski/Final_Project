@@ -46,11 +46,11 @@
         </tr>
         <!-- 3rd row -->
         <tr>
-          <td colspan="3" rowspan="4">
+          <td colspan="3" rowspan="4" class="foto">
             <span>8. Fotografia z opisem wskazującym orientację albo mapa z zaznaczonym stanowiskiem archeologicznym</span>
             {% block relic-image %}{% endblock %}
           </td>
-          <td>
+          <td class="address">
             <span>4. Adres</span>
             {% block relic-address %}
             {% endblock %}
@@ -58,7 +58,7 @@
         </tr>
         <!-- 4th row -->
         <tr>
-          <td>
+          <td class="govern">
             <span>5. Przynależność administracyjna</span><br>
             <p>
               <span>województwo</span>
@@ -87,7 +87,7 @@
         </tr>
         <!-- 6th row -->
         <tr>
-          <td>
+          <td class="author">
             <span>7. Opracowanie karty adresowej (autor, data i&nbsp;podpis)</span>
             {% block relic-author %}
             {% endblock %}
@@ -97,4 +97,4 @@
       </table>
     </form>
   </div>
-{% endblock %}
+{% endblock content %}

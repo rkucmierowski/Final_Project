@@ -35,15 +35,11 @@
 
 {% block relic-author %}
   <p>
-    {{ user.first_name }} {{ user.last_name }}, {{ form.date.value|date:'d E Y \r.' }}
+    {{ user.first_name }} {{ user.last_name }},<br> {{ form.date.value|date:'d E Y \r.' }}
   </p>
 {% endblock %}
 
 {% block relic-image %}
   {{ form.image }}
   {{ form.description.label }}{{ form.description }}
-{% endblock %}
-
-<!-- set form action -->
-{% block footer %}
 {% endblock %}

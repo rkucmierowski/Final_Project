@@ -19,4 +19,10 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = ['username',
+                  'password',
+                  'first_name',
+                  'last_name',
+                  'email',
+                  'office',
+                  'teryt']

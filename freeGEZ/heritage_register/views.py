@@ -1,28 +1,34 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.urls import reverse_lazy, reverse
-from django.core.paginator import Paginator
-from django.views.generic import View, CreateView, DeleteView, DetailView, ListView, UpdateView
-from django.template.loader import get_template
+from django.urls import reverse_lazy
+from django.views.generic import View, CreateView, DeleteView, ListView, UpdateView
+from datetime import datetime
 
-from weasyprint import HTML, CSS
-from weasyprint.fonts import FontConfiguration
-from freeGEZ.settings import BASE_DIR
+from weasyprint import HTML
+from zeep import Client
+from zeep.wsse.username import UsernameToken
 
 from .forms import CustomUserCreationForm
 from .models import Relic
-from suds.client import Client
 
 
-# def base(request):
-#     if request.method == 'GET':
-#         return render(request, 'heritage_register/card_pattern.html', {})
-def get_wsdl():
-    client = Client('https://uslugaterytws1.stat.gov.pl/wsdl/terytws1.wsdl')
-    HeaderMessage = client.factory.create('ns0:JednostkaPodzialuTerytorialnego')
-    gmina = client.service.WyszukajJPT('Zabrodzie').GmiNazwa
-    print(gmina)
+def get_jpt(teryt):
+    client = Client("https://uslugaterytws1test.stat.gov.pl/wsdl/terytws1.wsdl",
+                    wsse=UsernameToken(username='TestPubliczny', password='1234abcd'))
+    client.create_service(binding_name='{http://tempuri.org/}custom',
+                          address='https://uslugaterytws1test.stat.gov.pl/terytws1.svc')
+    if client.service.CzyZalogowany() == True:
+        factory = client.type_factory('ns2')
+        identyfiks = factory.identyfikatory(terc=teryt)
+        list_identyfiks = factory.ArrayOfidentyfikatory(identyfiks)
+        jpt = client.service.WyszukajJednostkeWRejestrze(identyfiks=list_identyfiks, kategoria='3',
+                                                         DataStanu=datetime.now())
+        if jpt != None:
+            jpt = jpt[0]
+            result = {i: jpt[i] for i in jpt if i == 'GmiNazwa' or i == 'Powiat' or i == 'Wojewodztwo'}
+            return result
+    else:
+        return None
 
 
 class RelicsListView(ListView):
@@ -41,7 +47,6 @@ class RelicDetailsView(ListView):
     paginate_by = 1
     queryset = Relic.objects.all().order_by('pk')
     template_name = 'heritage_register/switch.html'
-
 
     def get(self, request, *args, **kwargs):
         super(RelicDetailsView, self).get(self, request, *args, **kwargs)
@@ -64,9 +69,9 @@ class RelicDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class RelicUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = reverse_lazy('login')
     context_object_name = 'relic'
-    fields = ['name', 'time_of_creation', 'image']
+    fields = '__all__'
+    login_url = reverse_lazy('login')
     model = Relic
     success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page
     template_name = 'heritage_register/switch.html'
@@ -78,8 +83,8 @@ class RelicUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class CreateRelicView(LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')
     fields = '__all__'
+    login_url = reverse_lazy('login')
     model = Relic
     success_url = reverse_lazy('relics-list')
     template_name = 'heritage_register/switch.html'
@@ -94,9 +99,12 @@ class CreateRelicView(LoginRequiredMixin, CreateView):
 
     def get_initial(self):
         initial = super(CreateRelicView, self).get_initial()
-        initial['province'] = 'mazowieckie'
-        initial['district'] = 'wyszkowski'
-        initial['municipality'] = 'Zabrodzie'
+        teryt = str(self.request.user.teryt)
+        jpt = get_jpt(teryt=teryt)
+        if jpt != None:
+            initial['province'] = jpt['Wojewodztwo']
+            initial['district'] = jpt['Powiat']
+            initial['municipality'] = jpt['GmiNazwa']
         initial['image'] = 'blank.png'
         return initial
 
@@ -110,14 +118,6 @@ class CreateRelicView(LoginRequiredMixin, CreateView):
 class GeneratePdf(View):
 
     def get(self, request, pk):
-        # rules=''
-        # with open('{}/static/heritage_register/style.css'.format(BASE_DIR)) as f2:
-        #     rules = f2.read()
-        # html = HTML(filename='{}/templates/heritage_register/card_pattern.html'.format(BASE_DIR))
-        # font_conf = FontConfiguration()
-        # css = CSS(string=rules,  font_config=font_conf)
-        # pdf = html.write_pdf(stylesheets=[css], font_config=font_conf)
-        # return HttpResponse(pdf, content_type='application/pdf')
         url = '{}://{}/relic'.format(request.scheme, request.get_host())
         if pk:
             url += '/details/?page={}'.format(pk)

@@ -70,7 +70,17 @@ class RelicDeleteView(LoginRequiredMixin, DeleteView):
 
 class RelicUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'relic'
-    fields = '__all__'
+    fields = ['name',
+              'time_of_creation',
+              'place',
+              'address',
+              'province',
+              'district',
+              'municipality',
+              'forms_of_protection',
+              'image',
+              'description'
+              ]
     login_url = reverse_lazy('login')
     model = Relic
     success_url = reverse_lazy('relic-details')  # TODO: change url to last updated page

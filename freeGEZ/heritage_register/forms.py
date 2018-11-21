@@ -14,6 +14,8 @@ class CustomUserCreationForm(UserCreationForm):
                   'email',
                   'office',
                   'teryt']
+        labels = {'office': 'Nazwa urzędu',
+                  'teryt': 'TERYT gminy'}
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -26,3 +28,5 @@ class CustomUserChangeForm(UserChangeForm):
                   'email',
                   'office',
                   'teryt']
+        labels = {'office': 'Nazwa urzędu',
+                  'teryt': 'TERYT gminy'}

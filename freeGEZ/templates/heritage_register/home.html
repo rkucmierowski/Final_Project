@@ -6,8 +6,8 @@
       Zalogowano: <span>{{ user.username }}</span><br>
       <a href="{% url 'logout' %}" class="fa fa-sign-out-alt" title="wyloguj"> wyloguj</a>
     {% else %}
-      <a href="{% url 'login' %}">Zaloguj</a>
-      {#        <a href="{% url 'signup' %}">Zarejestruj</a>#}
+      <a href="{% url 'login' %}">Zaloguj</a> |
+      <a href="{% url 'signup' %}">Zarejestruj</a>
     {% endif %}
   </aside>
 {% endblock %}

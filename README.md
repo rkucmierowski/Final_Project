@@ -60,12 +60,29 @@ To run the application please follow these steps:
 
 * [Django Widget Tweaks](https://github.com/jazzband/django-widget-tweaks) – Used to tweak the form field rendering in templates, not in python-level form definitions
 
+* [Font Awesome](https://fontawesome.com/) – An iconic font with CSS toolkit
+
 * [WeasyPrint](https://weasyprint.readthedocs.io/en/stable/index.html) – A visual rendering engine for HTML and CSS that can export to PDF
 
 * [Zeep](https://python-zeep.readthedocs.io/en/master/) – A Python SOAP client
 
 * [TERYT ws1](http://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/usluga_sieciowa_interfejsy_api/opis_uslugi_sieciowej.aspx?contrast=default)
  – A web service that allows access to data from Polish National Official Register of the Territorial Division of the Country (TERYT).
+
+
+## Screenshots
+##### List of records:
+<img src="https://gist.githubusercontent.com/rkucmierowski/58f3deed06f430b455c8ab1a2d9ba4a7/raw/9d58a02b506155e74be16fbe517bd658ddd8e853/screen_listl.png">
+
+##### Form:
+<img src="https://gist.githubusercontent.com/rkucmierowski/58f3deed06f430b455c8ab1a2d9ba4a7/raw/9d58a02b506155e74be16fbe517bd658ddd8e853/screen_update.png">
+
+##### Details view:
+<img src="https://gist.githubusercontent.com/rkucmierowski/58f3deed06f430b455c8ab1a2d9ba4a7/raw/9d58a02b506155e74be16fbe517bd658ddd8e853/screen_detail.png">
+
+
+##### Export to PDF:
+<img src="https://gist.githubusercontent.com/rkucmierowski/58f3deed06f430b455c8ab1a2d9ba4a7/raw/9d58a02b506155e74be16fbe517bd658ddd8e853/screen_pdf.png">
 
 
 ## License
